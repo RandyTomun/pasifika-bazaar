@@ -102,6 +102,7 @@
   color: white;
   border-color: var(--navy);
 }
+.signinLink{background:var(--navy);color:#fff!important;border-radius:22px;padding:11px 16px}
 .cartButton {
   position: relative;
 }
@@ -294,6 +295,7 @@
   font-size: 11px;
   font-weight: 800;
 }
+.photo .retailer{position:absolute;right:12px;bottom:12px;left:auto;top:auto;color:#fff;border-radius:999px;padding:7px 11px;font-size:11px;font-style:normal;font-weight:850;box-shadow:0 5px 14px #0003}.photo .amazon{background:#202b3b}.photo .ebay{background:#3665f3}.photo .aliexpress{background:#e43225}
 .cardBody {
   padding: 18px;
 }
@@ -328,6 +330,7 @@
 .buy strong {
   font-size: 19px;
 }
+.buy>span{display:flex;flex-direction:column}.buy del{font-size:12px;color:#8a96a4}.buy a{border:0;background:var(--navy);color:#fff;border-radius:20px;padding:9px 16px;font-weight:800;white-space:nowrap}
 .buy button {
   border: 0;
   background: var(--navy);
@@ -353,6 +356,7 @@
   padding: 80px max(24px, calc((100vw - 1120px) / 2));
   align-items: center;
 }
+.editorial{background:var(--navy);color:#fff;padding:75px max(24px,calc((100vw - 1200px)/2));display:grid;grid-template-columns:.8fr 1.4fr;gap:70px}.editorial small{color:#7de4d5;font-weight:800;letter-spacing:.12em}.editorial h2{font:800 38px/1.15 var(--font-display);margin:12px 0}.editorial ol{list-style:none;padding:0;margin:0;display:grid;gap:14px}.editorial li{display:flex;gap:16px;background:#ffffff0c;border:1px solid #ffffff1f;border-radius:16px;padding:18px}.editorial li>b{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--orange);flex:0 0 auto}.editorial li span{color:#bed2d7;line-height:1.45}.editorial li strong{display:block;color:#fff;margin-bottom:3px}
 .sell > div p {
   font-size: 18px;
   line-height: 1.6;
@@ -396,6 +400,7 @@
   border-radius: 12px;
   font-weight: 800;
 }
+.modalDeal{border:0;background:var(--orange);color:#fff;padding:14px;border-radius:12px;font-weight:800;width:100%;text-align:center}
 .footer {
   padding: 55px max(24px, calc((100vw - 1200px) / 2));
   background: #f6f8f9;
@@ -581,6 +586,7 @@
   .sell {
     gap: 40px;
   }
+  .editorial{grid-template-columns:1fr;gap:25px;padding:55px 20px}.editorial h2{font-size:32px}
   .trust {
     flex-wrap: wrap;
   }
