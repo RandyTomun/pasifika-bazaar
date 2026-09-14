@@ -127,7 +127,8 @@ export default function Marketplace() {
     [query, setQuery] = useState(""),
     [cart, setCart] = useState<number[]>([]),
     [selected, setSelected] = useState<Product | null>(null),
-    [cartOpen, setCartOpen] = useState(false);
+    [cartOpen, setCartOpen] = useState(false),
+    [checkoutState, setCheckoutState] = useState<"idle" | "loading" | "error">("idle");
   const shown = useMemo(
     () =>
       products.filter(
@@ -142,6 +143,22 @@ export default function Marketplace() {
       0,
     ),
     add = (id: number) => setCart((a) => [...a, id]);
+
+  async function checkout() {
+    setCheckoutState("loading");
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productIds: cart }),
+      });
+      const result = (await response.json()) as { url?: string; error?: string };
+      if (!response.ok || !result.url) throw new Error(result.error || "Checkout unavailable");
+      window.location.assign(result.url);
+    } catch {
+      setCheckoutState("error");
+    }
+  }
   return (
     <main>
       <div className={s.notice}>
@@ -442,7 +459,12 @@ export default function Marketplace() {
                     <b>A${total.toFixed(2)}</b>
                   </p>
                   <small>Shipping and taxes calculated at checkout.</small>
-                  <button>Secure checkout</button>
+                  {checkoutState === "error" && (
+                    <p className={s.checkoutError}>Checkout is not connected yet. Please try again later.</p>
+                  )}
+                  <button onClick={checkout} disabled={checkoutState === "loading"}>
+                    {checkoutState === "loading" ? "Opening secure checkout…" : "Secure checkout"}
+                  </button>
                 </div>
               </>
             )}
