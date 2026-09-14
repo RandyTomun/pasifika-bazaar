@@ -8,3 +8,19 @@ export const checkoutCatalog: Record<number, { name: string; unitAmount: number;
   7: { name: "Portable POS Terminal Kit", unitAmount: 30400, image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1000&q=85" },
   8: { name: "Eco Packaging Bundle", unitAmount: 13600, image: "https://images.unsplash.com/photo-1605600659908-0ef719419d41?auto=format&fit=crop&w=1000&q=85" },
 };
+
+export type AffiliateProduct = {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  price: number;
+  originalPrice: number | null;
+  image: string;
+  badge: string | null;
+  retailer: "Amazon" | "eBay" | "AliExpress" | "Pasifika Bazaar";
+  affiliateUrl: string;
+  rating: number | null;
+  reviews: number;
+  category: string;
+};
