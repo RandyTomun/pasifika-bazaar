@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="t d">
+<title id="t">65W three-port USB-C charger illustration</title><desc id="d">Original neutral illustration of a compact dark three-port wall charger</desc>
+<defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#e1f7f2"/><stop offset="1" stop-color="#fff0e9"/></linearGradient><linearGradient id="body" x1="0" x2="1"><stop stop-color="#425866"/><stop offset="1" stop-color="#111f29"/></linearGradient></defs>
+<rect width="1200" height="900" rx="56" fill="url(#bg)"/><circle cx="1025" cy="150" r="115" fill="#ff674d" opacity=".14"/><path d="M115 710c220-88 397 91 620-5 175-74 274-35 358 10" fill="none" stroke="#078579" stroke-width="22" opacity=".16"/>
+<text x="600" y="125" text-anchor="middle" fill="#102a38" font-family="Arial,sans-serif" font-size="46" font-weight="700">COMPACT 65W CHARGER</text><text x="600" y="175" text-anchor="middle" fill="#087f73" font-family="Arial,sans-serif" font-size="28">3-PORT USB-C POWER</text>
+<g transform="translate(355 210) rotate(-5 245 265)"><rect x="85" y="0" width="490" height="520" rx="88" fill="url(#body)" stroke="#536b77" stroke-width="7"/><rect x="0" y="145" width="120" height="48" rx="12" fill="#aebec3"/><rect x="0" y="285" width="120" height="48" rx="12" fill="#aebec3"/>
+<rect x="220" y="108" width="230" height="76" rx="25" fill="#09131a"/><rect x="270" y="130" width="130" height="32" rx="14" fill="#79d9cf"/>
+<rect x="220" y="224" width="230" height="76" rx="25" fill="#09131a"/><rect x="270" y="246" width="130" height="32" rx="14" fill="#79d9cf"/>
+<rect x="220" y="340" width="230" height="76" rx="20" fill="#09131a"/><rect x="258" y="361" width="154" height="35" rx="7" fill="#7193a0"/>
+<text x="335" y="475" text-anchor="middle" fill="#dce8ea" font-family="Arial,sans-serif" font-size="30" font-weight="700">65W</text></g>
+<path d="M860 325q115 85 0 170m55-220q175 135 0 270" fill="none" stroke="#ff674d" stroke-width="17" stroke-linecap="round" opacity=".45"/>
+<text x="600" y="835" text-anchor="middle" fill="#536472" font-family="Arial,sans-serif" font-size="27">Illustrative image · confirm port output and compatibility</text></svg>
