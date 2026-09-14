@@ -1,6 +1,6 @@
 import { requireAdmin } from "@/lib/admin-auth";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
-import { addPacificCollection, bulkImportAmazonProducts, createProduct, signOut, toggleProduct } from "./actions";
+import { addPacificCollection, addPacificCollectionTwo, bulkImportAmazonProducts, createProduct, signOut, toggleProduct } from "./actions";
 import styles from "./admin.module.css";
 
 export const dynamic = "force-dynamic";
@@ -39,8 +39,12 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
     <section className={styles.panel}>
       <div className={styles.panelHeading}><div><p className={styles.eyebrow}>FAST IMPORT</p><h2>Bulk import Amazon products</h2></div><span>Up to 50 at once</span></div>
       <div className={styles.collectionCallout}>
-        <div><strong>Pacific lifestyle collection</strong><p className={styles.muted}>Add 10 popular beach, travel, swimming, outdoor and island-home products in one step.</p></div>
-        <form action={addPacificCollection}><button type="submit">Add the 10-product collection</button></form>
+        <div><strong>Pacific lifestyle collection 1</strong><p className={styles.muted}>Add the original 10-product beach, travel, swimming, outdoor and island-home collection.</p></div>
+        <form action={addPacificCollection}><button type="submit">Add collection 1</button></form>
+      </div>
+      <div className={styles.collectionCallout}>
+        <div><strong>Pacific lifestyle collection 2</strong><p className={styles.muted}>Add 10 more researched cooler, snorkelling, shade, fishing, camping and emergency products as drafts.</p></div>
+        <form action={addPacificCollectionTwo}><button type="submit">Add the next 10 products</button></form>
       </div>
       <p className={styles.muted}>Or paste one full Amazon Australia affiliate link per line. You may optionally put a cleaner product name before the link, separated by a | symbol.</p>
       {importMessage && <p className={importMessage.good ? styles.successMessage : styles.errorMessage}>{importMessage.text}</p>}
