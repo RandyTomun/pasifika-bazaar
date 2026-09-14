@@ -220,8 +220,8 @@ export default function Marketplace() {
         <div className={s.heroVisual}>
           <div className={s.largePhoto}>
             <Image
-              src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=90"
-              alt="Pacific coast"
+          src="https://images.unsplash.com/photo-1580458148390-76414895c3cd?auto=format&fit=crop&w=1200&q=90"
+          alt="Turquoise ocean waves meeting a Pacific beach"
               fill
               priority
               sizes="(max-width:800px) 100vw,50vw"
