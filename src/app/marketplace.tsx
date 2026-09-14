@@ -17,7 +17,7 @@ function shopperCategory(product: AffiliateProduct) {
 }
 
 export default function Marketplace({ products }: { products: AffiliateProduct[] }) {
-  const categorisedProducts = useMemo(() => products.map((p) => ({ ...p, category: shopperCategory(p) })), [products]);
+  const categorisedProducts = useMemo(() => products.map((p) => ({ ...p, category: shopperCategory(p), badge: p.badge?.startsWith("Amazon Bestseller #") ? "Bestseller pick" : p.badge })), [products]);
   const categories = useMemo(() => ["All", ...new Set(categorisedProducts.map((p) => p.category))], [categorisedProducts]);
   const [category, setCategory] = useState("All");
   const [query, setQuery] = useState("");
