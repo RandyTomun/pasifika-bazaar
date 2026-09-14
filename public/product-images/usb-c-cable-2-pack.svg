@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="t d">
+<title id="t">USB-C charging cable illustration</title><desc id="d">Original illustration of two braided USB-C to USB-C charging cables</desc>
+<defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#e1f7f2"/><stop offset="1" stop-color="#fff0e9"/></linearGradient><linearGradient id="metal" x1="0" x2="1"><stop stop-color="#9eb4bd"/><stop offset=".5" stop-color="#ecf4f5"/><stop offset="1" stop-color="#69818d"/></linearGradient></defs>
+<rect width="1200" height="900" rx="56" fill="url(#bg)"/><circle cx="1020" cy="160" r="115" fill="#ff674d" opacity=".14"/>
+<path d="M240 615c-90-185 18-395 238-385 212 10 320 199 209 357-78 111-274 80-291-43-15-110 102-158 187-101" fill="none" stroke="#18313f" stroke-width="42" stroke-linecap="round"/>
+<path d="M345 704c-70-145 8-310 178-313 177-3 280 143 210 274-48 91-184 95-242 17" fill="none" stroke="#3d5967" stroke-width="35" stroke-linecap="round"/>
+<g transform="translate(135 520) rotate(-18)"><rect width="210" height="92" rx="28" fill="url(#metal)"/><rect x="-55" y="18" width="80" height="56" rx="15" fill="#263d49"/><rect x="154" y="24" width="76" height="44" rx="12" fill="#151f25"/><rect x="171" y="34" width="42" height="24" rx="8" fill="#9ecac4"/></g>
+<g transform="translate(790 365) rotate(28)"><rect width="210" height="92" rx="28" fill="url(#metal)"/><rect x="-55" y="18" width="80" height="56" rx="15" fill="#263d49"/><rect x="154" y="24" width="76" height="44" rx="12" fill="#151f25"/><rect x="171" y="34" width="42" height="24" rx="8" fill="#9ecac4"/></g>
+<text x="600" y="155" text-anchor="middle" fill="#102a38" font-family="Arial,sans-serif" font-size="46" font-weight="700">USB-C TO USB-C</text><text x="600" y="205" text-anchor="middle" fill="#087f73" font-family="Arial,sans-serif" font-size="29">2-PACK · HIGH-POWER CHARGING</text>
+<text x="600" y="830" text-anchor="middle" fill="#536472" font-family="Arial,sans-serif" font-size="28">Illustrative image · confirm specifications with retailer</text></svg>
