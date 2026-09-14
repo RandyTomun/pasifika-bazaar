@@ -562,6 +562,7 @@
 .summary > button {
   width: 100%;
 }
+.summary > button:disabled{opacity:.65;cursor:wait}.checkoutError{font-size:13px!important;color:#b42318!important;background:#fff1f0;padding:10px;border-radius:9px}
 @media (max-width: 950px) {
   .header nav > a,
   .currency {
