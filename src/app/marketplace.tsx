@@ -5,12 +5,24 @@ import { useMemo, useState } from "react";
 import type { AffiliateProduct } from "@/lib/catalog";
 import s from "./page.module.css";
 
+function shopperCategory(product: AffiliateProduct) {
+  if (product.category && !["Other", "Uncategorised"].includes(product.category)) return product.category;
+  const text = `${product.name} ${product.description}`.toLowerCase();
+  if (/earpods|earphone|earbud|headphone|speaker/.test(text)) return "Audio";
+  if (/airtag|tracker|luggage/.test(text)) return "Travel & Tracking";
+  if (/microsd|memory card|kindle|reader/.test(text)) return "Storage & Reading";
+  if (/remote|hdmi|television|projector/.test(text)) return "Home Entertainment";
+  if (/power bank|charger|charging|usb-c|cable/.test(text)) return "Charging & Power";
+  return "Other";
+}
+
 export default function Marketplace({ products }: { products: AffiliateProduct[] }) {
-  const categories = useMemo(() => ["All", ...new Set(products.map((p) => p.category))], [products]);
+  const categorisedProducts = useMemo(() => products.map((p) => ({ ...p, category: shopperCategory(p) })), [products]);
+  const categories = useMemo(() => ["All", ...new Set(categorisedProducts.map((p) => p.category))], [categorisedProducts]);
   const [category, setCategory] = useState("All");
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<AffiliateProduct | null>(null);
-  const shown = products.filter((p) => (category === "All" || p.category === category) && `${p.name} ${p.description} ${p.retailer}`.toLowerCase().includes(query.toLowerCase()));
+  const shown = categorisedProducts.filter((p) => (category === "All" || p.category === category) && `${p.name} ${p.description} ${p.retailer}`.toLowerCase().includes(query.toLowerCase()));
   function recordClick(product: AffiliateProduct) { navigator.sendBeacon?.("/api/affiliate/click", new Blob([JSON.stringify({ productId: product.id })], { type: "application/json" })); }
 
   return <main>
