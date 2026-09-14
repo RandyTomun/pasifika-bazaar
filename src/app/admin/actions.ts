@@ -132,6 +132,57 @@ export async function bulkImportAmazonProducts(formData: FormData) {
   redirect(`/admin?bulk=success&added=${newProducts.length}&skipped=${skipped}`);
 }
 
+const PACIFIC_COLLECTION = [
+  { name: "JBL Go 4 Waterproof Portable Bluetooth Speaker", asin: "B0CX5F5QXQ", description: "A compact waterproof and dustproof speaker suited to beach days, family gatherings and travel." },
+  { name: "Owala FreeSip 710ml Insulated Water Bottle", asin: "B085DV8T75", description: "An insulated reusable drink bottle for warm-weather travel, sport and everyday hydration." },
+  { name: "Speedo Women's Biofuse 2.0 Swimming Goggles", asin: "B0D3DRKFP9", description: "Comfort-focused swimming goggles for pool sessions, coastal holidays and active island lifestyles." },
+  { name: "Dock & Bay Quick-Dry Sand-Free Beach Towel", asin: "B0GDK175F4", description: "A lightweight, quick-dry beach towel made for swimming, travel and relaxed days by the ocean." },
+  { name: "wellhouse 2-Pack Waterproof Phone Pouches", asin: "B0DY9TWPVF", description: "Waterproof phone pouches for beach trips, boating and keeping essentials protected around water." },
+  { name: "NIAN Waterproof Dry Bag", asin: "B09XJC2MD4", description: "A roll-top waterproof dry bag for boating, fishing, swimming and coastal adventures." },
+  { name: "Dock & Bay Kids Quick-Dry Sand-Free Beach Towel", asin: "B0GDJ1M5LT", description: "A compact children's beach towel for family holidays, swimming lessons and island adventures." },
+  { name: "ROCK CLOUD Portable Low Beach Chair", asin: "B0DY7KYHYT", description: "A folding low-profile chair for beaches, picnics, outdoor events and relaxed family gatherings." },
+  { name: "Multi-Functional Outdoor Camping Lantern", asin: "B0D4YWJWR6", description: "A portable lantern for camping, outdoor meals, emergency preparation and evening gatherings." },
+  { name: "Smarcute Natural Linen-Blend Sheer Curtains", asin: "B07D1HP9NW", description: "Light-filtering linen-blend curtains that bring a breezy, relaxed island feel to living spaces." },
+] as const;
+
+export async function addPacificCollection() {
+  await requireAdmin();
+  const db = getSupabaseAdmin();
+  const { data: existing, error: lookupError } = await db.from("products").select("affiliate_url,slug");
+  if (lookupError) redirect(`/admin?bulk=error&detail=${encodeURIComponent(lookupError.message)}`);
+
+  const existingAsins = new Set(
+    (existing ?? []).map((product) => String(product.affiliate_url ?? "").match(/\/dp\/([A-Z0-9]{10})/i)?.[1]?.toUpperCase()).filter(Boolean)
+  );
+  const newProducts = PACIFIC_COLLECTION.filter((product) => !existingAsins.has(product.asin));
+
+  if (!newProducts.length) redirect("/admin?bulk=duplicates&skipped=10");
+
+  const { error } = await db.from("products").insert(newProducts.map((product) => ({
+    name: product.name,
+    slug: `${slugify(product.name)}-${product.asin.toLowerCase()}`,
+    description: product.description,
+    category_id: null,
+    price_aud_cents: 0,
+    stock_quantity: 0,
+    original_price_aud_cents: null,
+    image_url: AMAZON_PLACEHOLDER,
+    product_type: "affiliate",
+    retailer: "Amazon",
+    affiliate_url: `https://www.amazon.com.au/dp/${product.asin}?tag=${AMAZON_TAG}`,
+    rating: null,
+    review_count: 0,
+    badge: "Pacific lifestyle pick",
+    is_active: false,
+    is_featured: false,
+  })));
+  if (error) redirect(`/admin?bulk=error&detail=${encodeURIComponent(error.message)}`);
+
+  revalidatePath("/admin");
+  revalidatePath("/");
+  redirect(`/admin?bulk=success&added=${newProducts.length}&skipped=${PACIFIC_COLLECTION.length - newProducts.length}`);
+}
+
 export async function createProduct(formData: FormData) {
   await requireAdmin();
   const name = requiredText(formData, "name");
