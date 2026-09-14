@@ -204,7 +204,7 @@ export async function addPacificCollectionTwo() {
   if (lookupError) redirect(`/admin?bulk=error&detail=${encodeURIComponent(lookupError.message)}`);
 
   const existingAsins = new Set(
-    (existing ?? []).map((product) => String(product.affiliate_url ?? "").match(/\\/dp\\/([A-Z0-9]{10})/i)?.[1]?.toUpperCase()).filter(Boolean)
+    (existing ?? []).map((product) => String(product.affiliate_url ?? "").match(/\/dp\/([A-Z0-9]{10})/i)?.[1]?.toUpperCase()).filter(Boolean)
   );
   const newProducts = PACIFIC_COLLECTION_TWO.filter((product) => !existingAsins.has(product.asin));
 
