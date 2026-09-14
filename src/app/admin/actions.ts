@@ -183,6 +183,58 @@ export async function addPacificCollection() {
   redirect(`/admin?bulk=success&added=${newProducts.length}&skipped=${PACIFIC_COLLECTION.length - newProducts.length}`);
 }
 
+
+const PACIFIC_COLLECTION_TWO = [
+  { name: "Lifewit Large Insulated Soft Cooler Bag", asin: "B0HHZ3QCYM", description: "A spacious insulated cooler for family picnics, beach days, barbecues and warm-weather travel." },
+  { name: "EMSINA Full-Face Panoramic Snorkel Mask", asin: "B0HG9JGRDN", description: "A panoramic snorkel mask designed for reef viewing, swimming holidays and coastal adventures." },
+  { name: "Waterproof UV-Block Outdoor Sun Shelter", asin: "B0H8H32Q9J", description: "A water-resistant UV-blocking shelter for beaches, outdoor gatherings, markets and family events." },
+  { name: "Foldable Outdoor Beach Sunshade Umbrella", asin: "B0G7BNVB64", description: "A portable sunshade suited to beaches, fishing trips, picnics and outdoor family gatherings." },
+  { name: "Glocusent Rechargeable 135-LED Camping Lantern", asin: "B0FL22QSGP", description: "A highly rated rechargeable lantern and power bank for camping, emergencies and island homes." },
+  { name: "Waterproof Book of Fishing Knots", asin: "0958084300", description: "A durable waterproof knot guide for recreational fishing, boating and coastal adventures." },
+  { name: "Aonjrs 10000mAh Camping Light and Power Bank", asin: "B0D32QMWDH", description: "A long-running tent light with an integrated power bank for camping and emergency preparedness." },
+  { name: "Quntis Rechargeable Telescoping Camping Lantern", asin: "B0DSB9HT7G", description: "A compact magnetic lantern for outdoor cooking, evening gatherings and emergency lighting." },
+  { name: "Solar-Powered Rechargeable Camping Lanterns", asin: "B0CDP66JFT", description: "Solar-rechargeable lighting for camping, power interruptions and off-grid outdoor use." },
+  { name: "Portable Rechargeable Emergency Camping Lantern", asin: "B0FDFDY4GX", description: "A portable outdoor light for travel, backyard entertaining, fishing and emergency preparation." },
+] as const;
+
+export async function addPacificCollectionTwo() {
+  await requireAdmin();
+  const db = getSupabaseAdmin();
+  const { data: existing, error: lookupError } = await db.from("products").select("affiliate_url,slug");
+  if (lookupError) redirect(`/admin?bulk=error&detail=${encodeURIComponent(lookupError.message)}`);
+
+  const existingAsins = new Set(
+    (existing ?? []).map((product) => String(product.affiliate_url ?? "").match(/\\/dp\\/([A-Z0-9]{10})/i)?.[1]?.toUpperCase()).filter(Boolean)
+  );
+  const newProducts = PACIFIC_COLLECTION_TWO.filter((product) => !existingAsins.has(product.asin));
+
+  if (!newProducts.length) redirect(`/admin?bulk=duplicates&skipped=${PACIFIC_COLLECTION_TWO.length}`);
+
+  const { error } = await db.from("products").insert(newProducts.map((product) => ({
+    name: product.name,
+    slug: `${slugify(product.name)}-${product.asin.toLowerCase()}`,
+    description: product.description,
+    category_id: null,
+    price_aud_cents: 0,
+    stock_quantity: 0,
+    original_price_aud_cents: null,
+    image_url: AMAZON_PLACEHOLDER,
+    product_type: "affiliate",
+    retailer: "Amazon",
+    affiliate_url: `https://www.amazon.com.au/dp/${product.asin}?tag=${AMAZON_TAG}`,
+    rating: null,
+    review_count: 0,
+    badge: "Pacific outdoor pick",
+    is_active: false,
+    is_featured: false,
+  })));
+  if (error) redirect(`/admin?bulk=error&detail=${encodeURIComponent(error.message)}`);
+
+  revalidatePath("/admin");
+  revalidatePath("/");
+  redirect(`/admin?bulk=success&added=${newProducts.length}&skipped=${PACIFIC_COLLECTION_TWO.length - newProducts.length}`);
+}
+
 export async function createProduct(formData: FormData) {
   await requireAdmin();
   const name = requiredText(formData, "name");
